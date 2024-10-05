@@ -17,14 +17,15 @@ public class Conexion {
         String url = "jdbc:mysql://localhost:3306/ecommerce_db"; // Cambia "nombre_base_datos" con tu base de datos
         String username = "root"; // Cambia "tu_usuario" por tu nombre de usuario de MySQL
         String password = ""; // Cambia "tu_contraseña" por tu contraseña de MySQL
-
-        // Estableciendo conexión
-        try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            System.out.println("Conexión exitosa a la base de datos MySQL!");
-
+ 
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            return DriverManager.getConnection(url, username, password);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger (Conexion.class.getName()).log(Level. SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(CategoriaCad.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger (Conexion.class.getName()).log(Level. SEVERE, null, ex);
         }
-        return null;
+        return null; 
     }
 }
